@@ -12,11 +12,12 @@ public class Main {
         // Create players (bots)
         Player player1 = new ExampleBot("Bot1");
         Player player2 = new ExampleBot("Bot2");
-        Player player3 = new ExampleBot("Bot3");
-        Player player4 = new ExampleBot("Bot4");
+//        Player player3 = new ExampleBot("Bot3");
+//        Player player4 = new ExampleBot("Bot4");
 
-        List<Player> players = Arrays.asList(player1, player2, player3, player4);
-        
+        List<Player> players = Arrays.asList(player1, player2);
+//        List<Player> players = Arrays.asList(player1, player2, player3, player4);
+
         // Initialize game engine
         GameEngine gameEngine = new GameEngine(players);
 

@@ -1,6 +1,6 @@
 board:
-  size: 10
-  obstacleDensity: 0.05
+  size: 5
+  obstacleDensity: 0.1
   fogOfWar:
     enabled: true
     viewRadius: 3  # Number of cells a tank can see in each direction
