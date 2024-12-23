@@ -21,7 +21,7 @@ public class GameEngine {
     private final LinkedList<GameState> previousStates;
     private static final int STALEMATE_DETECTION_LENGTH = 40; // Increase to allow longer detection
 
-    public GameEngine(List<Player> players) {
+    public GameEngine(List<Player> players, String logFilePath) {
         if (players.size() < GameConfig.getMinPlayers() || players.size() > GameConfig.getMaxPlayers()) {
             throw new IllegalArgumentException("Invalid number of players");
         }
@@ -30,7 +30,7 @@ public class GameEngine {
         this.currentPlayerIndex = 0;
         this.gameOver = false;
         this.previousStates = new LinkedList<>();
-        this.logger = new GameLogger();
+        this.logger = new GameLogger(logFilePath);
         
         initializeGame();
     }
@@ -246,7 +246,7 @@ public class GameEngine {
         return players.get(currentPlayerIndex);
     }
 
-    private boolean isStalemate() {
+    public boolean isStalemate() {
         if (previousStates.size() < GameConfig.getTurnsToCheck()) {
             return false;
         }
