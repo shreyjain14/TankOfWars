@@ -92,6 +92,10 @@ public class TournamentManager {
     }
 
     private void runMatch(Player bot1, Player bot2, int currentMatch, int totalMatches, boolean fixedOrder) throws SQLException {
+        // Reset bots to initial state
+        bot1.getTank().reset();
+        bot2.getTank().reset();
+
         String logFilePath = String.format("%s/match_%d_%s_vs_%s.log", 
                                            tournamentDir, currentMatch, bot1.getName(), bot2.getName());
         List<Player> players = fixedOrder ? List.of(bot1, bot2) : (Math.random() < 0.5 ? List.of(bot1, bot2) : List.of(bot2, bot1));
