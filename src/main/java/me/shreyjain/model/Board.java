@@ -4,6 +4,8 @@ import me.shreyjain.config.GameConfig;
 import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Board {
     private final Cell[][] grid;
@@ -88,5 +90,18 @@ public class Board {
     // Add this method to get the raw grid for admin view
     public Cell[][] getGrid() {
         return grid;
+    }
+
+
+    public String getFormattedObstaclePositions() {
+        StringBuilder sb = new StringBuilder();
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                if (hasObstacle(new Position(x, y))) {
+                    sb.append(String.format("(%d,%d) ", x, y));
+                }
+            }
+        }
+        return sb.toString().trim();
     }
 } 

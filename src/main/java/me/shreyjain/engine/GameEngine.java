@@ -45,6 +45,10 @@ public class GameEngine {
         
         // Log initial game state
         logger.log("Game initialized with " + players.size() + " players");
+        logger.log("Board size: " + GameConfig.getBoardSize());
+        logger.log("Obstacle density: " + GameConfig.getObstacleDensity());
+        logger.log("Max turns: " + GameConfig.getMaxTurns());
+
         for (Player player : players) {
             Tank tank = player.getTank();
             logger.log(String.format("Player %s starting at position (%d,%d) facing %s", 
@@ -53,6 +57,10 @@ public class GameEngine {
                 tank.getPosition().getY(),
                 tank.getDirection()));
         }
+
+        // Log obstacle positions
+        String obstacles = board.getFormattedObstaclePositions();
+        logger.log("Obstacles at positions: " + obstacles);
     }
 
     private void placeTanks() {
@@ -80,6 +88,14 @@ public class GameEngine {
 
     public void executeNextTurn() {
         if (gameOver) return;
+
+        // Check if any tanks are still active
+        long activeTanks = players.stream().filter(p -> !p.getTank().isDestroyed()).count();
+        if (activeTanks <= 1) {
+            gameOver = true;
+            logger.log("Game Over! No tanks remaining.");
+            return;
+        }
 
         Player currentPlayer = players.get(currentPlayerIndex);
         logger.log("Starting turn for " + currentPlayer.getName());
