@@ -11,9 +11,9 @@ players:
   movesPerTurn: 3
   stalemateDetection:
     enabled: true
-    maxStateRepetitions: 6    # Increase the number of times a state can repeat before stalemate
-    maxUnchangedTurns: 15     # Increase the number of turns without changes before stalemate
-    turnsToCheck: 30          # Increase the number of past turns to check
+    maxStateRepetitions: 10    # Number of times a state can repeat before stalemate
+    maxUnchangedTurns: 20      # Number of turns without changes before stalemate
+    turnsToCheck: 40           # Number of past turns to check
 
 tank:
   initialHealth: 100

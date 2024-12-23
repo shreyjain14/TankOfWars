@@ -88,4 +88,21 @@ public class GameConfig {
     public static boolean isColorEnabled() {
         return getValue("view", "colorEnabled");
     }
+
+    // Stalemate detection settings
+    public static boolean isStalemateDetectionEnabled() {
+        return getValue("players", "stalemateDetection", "enabled");
+    }
+
+    public static int getMaxStateRepetitions() {
+        return getValue("players", "stalemateDetection", "maxStateRepetitions");
+    }
+
+    public static int getMaxUnchangedTurns() {
+        return getValue("players", "stalemateDetection", "maxUnchangedTurns");
+    }
+
+    public static int getTurnsToCheck() {
+        return getValue("players", "stalemateDetection", "turnsToCheck");
+    }
 } 
