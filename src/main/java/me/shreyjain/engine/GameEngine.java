@@ -130,27 +130,36 @@ public class GameEngine {
         
         switch (move) {
             case MOVE_FORWARD:
-                Position newPos = currentPos.move(currentDir);
-                if (isValidMove(newPos)) {
-                    board.placeTank(tank, newPos);
+                Position forwardPos = currentPos.move(currentDir);
+                if (isValidMove(forwardPos)) {
+                    board.placeTank(tank, forwardPos);
                     logger.log(String.format("%s moved forward to (%d,%d)", 
-                        player.getName(), newPos.getX(), newPos.getY()));
+                        player.getName(), forwardPos.getX(), forwardPos.getY()));
                 } else {
                     logger.log(String.format("%s attempted invalid forward move to (%d,%d)", 
-                        player.getName(), newPos.getX(), newPos.getY()));
+                        player.getName(), forwardPos.getX(), forwardPos.getY()));
                 }
                 break;
             case MOVE_BACKWARD:
-                Position backPos = currentPos.move(currentDir.opposite());
-                if (isValidMove(backPos)) {
-                    board.placeTank(tank, backPos);
+                Position backwardPos = currentPos.move(currentDir.opposite());
+                if (isValidMove(backwardPos)) {
+                    board.placeTank(tank, backwardPos);
+                    logger.log(String.format("%s moved backward to (%d,%d)", 
+                        player.getName(), backwardPos.getX(), backwardPos.getY()));
+                } else {
+                    logger.log(String.format("%s attempted invalid backward move to (%d,%d)", 
+                        player.getName(), backwardPos.getX(), backwardPos.getY()));
                 }
                 break;
             case ROTATE_LEFT:
                 tank.setDirection(currentDir.rotateLeft());
+                logger.log(String.format("%s rotated left to face %s", 
+                    player.getName(), tank.getDirection()));
                 break;
             case ROTATE_RIGHT:
                 tank.setDirection(currentDir.rotateRight());
+                logger.log(String.format("%s rotated right to face %s", 
+                    player.getName(), tank.getDirection()));
                 break;
             case SHOOT:
                 logger.log(String.format("%s shooting in direction %s", 

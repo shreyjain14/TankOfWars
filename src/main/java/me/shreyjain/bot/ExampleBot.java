@@ -32,8 +32,13 @@ public class ExampleBot implements Player {
             // Rotate to face enemy if needed
             Direction directionToEnemy = getDirectionToTarget(currentPos, enemyTank.getPosition());
             while (currentDirection != directionToEnemy && moves.size() < GameConfig.getMovesPerTurn()) {
-                moves.add(Move.ROTATE_RIGHT);
-                currentDirection = currentDirection.rotateRight();
+                if (currentDirection.rotateRight() == directionToEnemy) {
+                    moves.add(Move.ROTATE_RIGHT);
+                    currentDirection = currentDirection.rotateRight();
+                } else {
+                    moves.add(Move.ROTATE_LEFT);
+                    currentDirection = currentDirection.rotateLeft();
+                }
             }
             
             // Shoot if facing enemy
@@ -76,8 +81,13 @@ public class ExampleBot implements Player {
 
             // Rotate towards target direction if needed
             while (currentDirection != directionToCenter && moves.size() < GameConfig.getMovesPerTurn()) {
-                moves.add(Move.ROTATE_RIGHT);
-                currentDirection = currentDirection.rotateRight();
+                if (currentDirection.rotateRight() == directionToCenter) {
+                    moves.add(Move.ROTATE_RIGHT);
+                    currentDirection = currentDirection.rotateRight();
+                } else {
+                    moves.add(Move.ROTATE_LEFT);
+                    currentDirection = currentDirection.rotateLeft();
+                }
             }
 
             // Move forward if facing the right direction and path is clear
@@ -117,30 +127,7 @@ public class ExampleBot implements Player {
             
             Tank tankAtPosition = boardState.getTankAt(checkPos);
             if (tankAtPosition != null && tankAtPosition != this.tank) {
-                // Only return the tank if it's directly in our line of fire
-                switch (currentDirection) {
-                    case NORTH:
-                        if (tankAtPosition.getPosition().getX() == currentPos.getX() && 
-                            tankAtPosition.getPosition().getY() < currentPos.getY())
-                            return tankAtPosition;
-                        break;
-                    case SOUTH:
-                        if (tankAtPosition.getPosition().getX() == currentPos.getX() && 
-                            tankAtPosition.getPosition().getY() > currentPos.getY())
-                            return tankAtPosition;
-                        break;
-                    case EAST:
-                        if (tankAtPosition.getPosition().getY() == currentPos.getY() && 
-                            tankAtPosition.getPosition().getX() > currentPos.getX())
-                            return tankAtPosition;
-                        break;
-                    case WEST:
-                        if (tankAtPosition.getPosition().getY() == currentPos.getY() && 
-                            tankAtPosition.getPosition().getX() < currentPos.getX())
-                            return tankAtPosition;
-                        break;
-                }
-                break;
+                return tankAtPosition;
             }
         }
         return null;
@@ -151,19 +138,19 @@ public class ExampleBot implements Player {
         int dy = to.getY() - from.getY();
 
         // If on same column, prioritize vertical movement
-        if (dx == 0) {
-            return dy > 0 ? Direction.SOUTH : Direction.NORTH;
+        if (dy == 0) {
+            return dx > 0 ? Direction.SOUTH : Direction.NORTH;
         }
         // If on same row, prioritize horizontal movement
-        else if (dy == 0) {
-            return dx > 0 ? Direction.EAST : Direction.WEST;
+        else if (dx == 0) {
+            return dy > 0 ? Direction.EAST : Direction.WEST;
         }
         // Otherwise, prioritize the larger difference
         else {
             if (Math.abs(dx) > Math.abs(dy)) {
-                return dx > 0 ? Direction.EAST : Direction.WEST;
+                return dx > 0 ? Direction.SOUTH : Direction.NORTH;
             } else {
-                return dy > 0 ? Direction.SOUTH : Direction.NORTH;
+                return dy > 0 ? Direction.EAST : Direction.WEST;
             }
         }
     }
