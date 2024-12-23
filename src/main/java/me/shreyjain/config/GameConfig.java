@@ -109,4 +109,12 @@ public class GameConfig {
     public static int getRoundRobinRepetitions() {
         return getValue("players", "roundRobinRepetitions");
     }
+
+    public static int getMaxMoves() {
+        return (Integer) config.get("max_moves");
+    }
+
+    public static int getMaxTurns() {
+        return (Integer) config.get("max_turns");
+    }
 } 

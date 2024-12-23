@@ -21,6 +21,9 @@ public class GameEngine {
     private final LinkedList<GameState> previousStates;
     private static final int STALEMATE_DETECTION_LENGTH = 40; // Increase to allow longer detection
 
+    private int turnCount = 0;
+    private final int maxTurns;
+
     public GameEngine(List<Player> players, String logFilePath) {
         if (players.size() < GameConfig.getMinPlayers() || players.size() > GameConfig.getMaxPlayers()) {
             throw new IllegalArgumentException("Invalid number of players");
@@ -31,6 +34,7 @@ public class GameEngine {
         this.gameOver = false;
         this.previousStates = new LinkedList<>();
         this.logger = new GameLogger(logFilePath);
+        this.maxTurns = GameConfig.getMaxTurns();
         
         initializeGame();
     }
@@ -129,6 +133,14 @@ public class GameEngine {
         }
 
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+        if (currentPlayerIndex == 0) {
+            turnCount++;
+            if (turnCount >= maxTurns) {
+                System.out.println("Game declared a draw due to turn limit.");
+                gameOver = true;
+                return;
+            }
+        }
     }
 
     private void executeMove(Player player, Move move) {
@@ -239,7 +251,7 @@ public class GameEngine {
     }
 
     public boolean isGameOver() {
-        return gameOver;
+        return turnCount >= maxTurns || gameOver;
     }
 
     public Player getCurrentPlayer() {
