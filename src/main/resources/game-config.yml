@@ -14,7 +14,7 @@ players:
     maxStateRepetitions: 10    # Number of times a state can repeat before stalemate
     maxUnchangedTurns: 20      # Number of turns without changes before stalemate
     turnsToCheck: 40           # Number of past turns to check
-  roundRobinRepetitions: 5  # Number of times each pair plays
+  roundRobinRepetitions: 3  # Number of times each pair plays
 
 tank:
   initialHealth: 100
@@ -27,3 +27,5 @@ view:
   moveDelay: 500       # Milliseconds between moves
   showHealth: true     # Show tank health in display
   colorEnabled: true   # Set to false if terminal doesn't support ANSI colors
+
+max_turns: 100  # Set the maximum number of turns allowed before declaring a draw
