@@ -105,4 +105,8 @@ public class GameConfig {
     public static int getTurnsToCheck() {
         return getValue("players", "stalemateDetection", "turnsToCheck");
     }
+
+    public static int getRoundRobinRepetitions() {
+        return getValue("players", "roundRobinRepetitions");
+    }
 } 
