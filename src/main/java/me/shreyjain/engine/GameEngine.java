@@ -19,7 +19,7 @@ public class GameEngine {
     
     // For stalemate detection
     private final LinkedList<GameState> previousStates;
-    private static final int STALEMATE_DETECTION_LENGTH = 20; // Number of turns to check for repeats
+    private static final int STALEMATE_DETECTION_LENGTH = 40; // Increase to allow longer detection
 
     public GameEngine(List<Player> players) {
         if (players.size() < GameConfig.getMinPlayers() || players.size() > GameConfig.getMaxPlayers()) {
@@ -52,12 +52,20 @@ public class GameEngine {
     }
 
     private void placeTanks() {
-        // Example corner positions for tanks
+        int boardSize = GameConfig.getBoardSize();
         List<Position> startPositions = new ArrayList<>();
-        startPositions.add(new Position(0, 0));
-        startPositions.add(new Position(0, GameConfig.getBoardSize() - 1));
-        startPositions.add(new Position(GameConfig.getBoardSize() - 1, 0));
-        startPositions.add(new Position(GameConfig.getBoardSize() - 1, GameConfig.getBoardSize() - 1));
+
+        if (players.size() == 2) {
+            // For 2 players, place them at (0, 0) and (N, N)
+            startPositions.add(new Position(0, 0));
+            startPositions.add(new Position(boardSize - 1, boardSize - 1));
+        } else {
+            // For more players, use the corners
+            startPositions.add(new Position(0, 0));
+            startPositions.add(new Position(0, boardSize - 1));
+            startPositions.add(new Position(boardSize - 1, 0));
+            startPositions.add(new Position(boardSize - 1, boardSize - 1));
+        }
 
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
@@ -239,7 +247,7 @@ public class GameEngine {
     }
 
     private boolean isStalemate() {
-        if (previousStates.size() < STALEMATE_DETECTION_LENGTH) {
+        if (previousStates.size() < GameConfig.getTurnsToCheck()) {
             return false;
         }
 
@@ -260,7 +268,7 @@ public class GameEngine {
             }
             
             // If we've seen this exact state too many times, or no changes for too long
-            if (repeatCount >= 4 || unchangedTurns >= 10) {
+            if (repeatCount >= GameConfig.getMaxStateRepetitions() || unchangedTurns >= GameConfig.getMaxUnchangedTurns()) {
                 logger.log(String.format("Stalemate detected: State repeated %d times, unchanged for %d turns", 
                     repeatCount, unchangedTurns));
                 return true;
