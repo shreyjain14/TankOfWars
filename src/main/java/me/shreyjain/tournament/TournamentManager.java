@@ -113,7 +113,7 @@ public class TournamentManager {
         updateResults(bot1, bot2, winnerName);
 
         // Log match result
-        String result = "[" + (currentMatch) + "/" + totalMatches + "] ";
+        String result = "[" + (currentMatch) + "/" + totalMatches + "] " + bot1.getName() + " vs " + bot2.getName() + ": ";
         if ("Draw".equals(winnerName)) {
             result += "Draw";
         } else {
