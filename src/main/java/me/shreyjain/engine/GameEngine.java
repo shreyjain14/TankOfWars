@@ -19,9 +19,9 @@ public class GameEngine {
     
     // For stalemate detection
     private final LinkedList<GameState> previousStates;
-    private static final int STALEMATE_DETECTION_LENGTH = 20; // Number of turns to check for repeats
+    private static final int STALEMATE_DETECTION_LENGTH = 40; // Increase to allow longer detection
 
-    public GameEngine(List<Player> players) {
+    public GameEngine(List<Player> players, String logFilePath) {
         if (players.size() < GameConfig.getMinPlayers() || players.size() > GameConfig.getMaxPlayers()) {
             throw new IllegalArgumentException("Invalid number of players");
         }
@@ -30,7 +30,7 @@ public class GameEngine {
         this.currentPlayerIndex = 0;
         this.gameOver = false;
         this.previousStates = new LinkedList<>();
-        this.logger = new GameLogger();
+        this.logger = new GameLogger(logFilePath);
         
         initializeGame();
     }
@@ -52,12 +52,20 @@ public class GameEngine {
     }
 
     private void placeTanks() {
-        // Example corner positions for tanks
+        int boardSize = GameConfig.getBoardSize();
         List<Position> startPositions = new ArrayList<>();
-        startPositions.add(new Position(0, 0));
-        startPositions.add(new Position(0, GameConfig.getBoardSize() - 1));
-        startPositions.add(new Position(GameConfig.getBoardSize() - 1, 0));
-        startPositions.add(new Position(GameConfig.getBoardSize() - 1, GameConfig.getBoardSize() - 1));
+
+        if (players.size() == 2) {
+            // For 2 players, place them at (0, 0) and (N, N)
+            startPositions.add(new Position(0, 0));
+            startPositions.add(new Position(boardSize - 1, boardSize - 1));
+        } else {
+            // For more players, use the corners
+            startPositions.add(new Position(0, 0));
+            startPositions.add(new Position(0, boardSize - 1));
+            startPositions.add(new Position(boardSize - 1, 0));
+            startPositions.add(new Position(boardSize - 1, boardSize - 1));
+        }
 
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
@@ -130,27 +138,36 @@ public class GameEngine {
         
         switch (move) {
             case MOVE_FORWARD:
-                Position newPos = currentPos.move(currentDir);
-                if (isValidMove(newPos)) {
-                    board.placeTank(tank, newPos);
+                Position forwardPos = currentPos.move(currentDir);
+                if (isValidMove(forwardPos)) {
+                    board.placeTank(tank, forwardPos);
                     logger.log(String.format("%s moved forward to (%d,%d)", 
-                        player.getName(), newPos.getX(), newPos.getY()));
+                        player.getName(), forwardPos.getX(), forwardPos.getY()));
                 } else {
                     logger.log(String.format("%s attempted invalid forward move to (%d,%d)", 
-                        player.getName(), newPos.getX(), newPos.getY()));
+                        player.getName(), forwardPos.getX(), forwardPos.getY()));
                 }
                 break;
             case MOVE_BACKWARD:
-                Position backPos = currentPos.move(currentDir.opposite());
-                if (isValidMove(backPos)) {
-                    board.placeTank(tank, backPos);
+                Position backwardPos = currentPos.move(currentDir.opposite());
+                if (isValidMove(backwardPos)) {
+                    board.placeTank(tank, backwardPos);
+                    logger.log(String.format("%s moved backward to (%d,%d)", 
+                        player.getName(), backwardPos.getX(), backwardPos.getY()));
+                } else {
+                    logger.log(String.format("%s attempted invalid backward move to (%d,%d)", 
+                        player.getName(), backwardPos.getX(), backwardPos.getY()));
                 }
                 break;
             case ROTATE_LEFT:
                 tank.setDirection(currentDir.rotateLeft());
+                logger.log(String.format("%s rotated left to face %s", 
+                    player.getName(), tank.getDirection()));
                 break;
             case ROTATE_RIGHT:
                 tank.setDirection(currentDir.rotateRight());
+                logger.log(String.format("%s rotated right to face %s", 
+                    player.getName(), tank.getDirection()));
                 break;
             case SHOOT:
                 logger.log(String.format("%s shooting in direction %s", 
@@ -229,8 +246,8 @@ public class GameEngine {
         return players.get(currentPlayerIndex);
     }
 
-    private boolean isStalemate() {
-        if (previousStates.size() < STALEMATE_DETECTION_LENGTH) {
+    public boolean isStalemate() {
+        if (previousStates.size() < GameConfig.getTurnsToCheck()) {
             return false;
         }
 
@@ -251,7 +268,7 @@ public class GameEngine {
             }
             
             // If we've seen this exact state too many times, or no changes for too long
-            if (repeatCount >= 4 || unchangedTurns >= 10) {
+            if (repeatCount >= GameConfig.getMaxStateRepetitions() || unchangedTurns >= GameConfig.getMaxUnchangedTurns()) {
                 logger.log(String.format("Stalemate detected: State repeated %d times, unchanged for %d turns", 
                     repeatCount, unchangedTurns));
                 return true;
