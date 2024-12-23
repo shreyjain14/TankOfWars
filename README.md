@@ -1,4 +1,3 @@
-
 ## Running the Game
 
 1. Clone the repository
@@ -19,9 +18,15 @@ All game events are logged to:
 3. Test against the `ExampleBot`
 4. Submit your bot for the tournament
 
+## Tournament Features
+
+- **Automated Matchmaking**: Bots are automatically paired for matches.
+- **Leaderboard**: Real-time leaderboard updates based on match results.
+- **Scoring System**: Points are awarded based on performance in matches.
+
 ## Technical Details
 
-- Java 8+ required
+- Java 23+ required
 - Uses SnakeYAML for configuration
 - ANSI terminal support for visualization
 - Maven for dependency management
