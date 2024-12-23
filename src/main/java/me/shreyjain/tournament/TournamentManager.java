@@ -56,15 +56,29 @@ public class TournamentManager {
 
     public void runTournament() throws SQLException {
         int repetitions = GameConfig.getRoundRobinRepetitions();
+        int totalMatches = calculateTotalMatches(repetitions);
+        int currentMatch = 0;
+
+        int halfRepetitions, lastRepetition;
+
+        if (repetitions % 2 != 0) {
+            halfRepetitions = repetitions / 2;
+            lastRepetition = repetitions;
+        } else {
+            halfRepetitions = (repetitions - 1) / 2;
+            lastRepetition = repetitions - 1;
+        }
+            
         for (int i = 0; i < bots.size(); i++) {
             for (int j = i + 1; j < bots.size(); j++) {
                 for (int k = 0; k < repetitions; k++) {
-                    if (k < 2) {
-                        runMatch(bots.get(i), bots.get(j), k + 1, true);  // Bot1 starts
-                    } else if (k < 4) {
-                        runMatch(bots.get(j), bots.get(i), k + 1, true);  // Bot2 starts
+                    currentMatch++;                    
+                    if (k < halfRepetitions) {
+                        runMatch(bots.get(i), bots.get(j), currentMatch, totalMatches, true);  // Bot1 starts
+                    } else if (k < lastRepetition) {
+                        runMatch(bots.get(j), bots.get(i), currentMatch, totalMatches, true);  // Bot2 starts
                     } else {
-                        runMatch(bots.get(i), bots.get(j), k + 1, false); // Random start
+                        runMatch(bots.get(i), bots.get(j), currentMatch, totalMatches, false); // Random start
                     }
                 }
             }
@@ -72,11 +86,18 @@ public class TournamentManager {
         tournamentLogger.close();
     }
 
-    private void runMatch(Player bot1, Player bot2, int matchNumber, boolean fixedOrder) throws SQLException {
-        String logFilePath = String.format("%s/match_%s_vs_%s_game_%d.log", 
-                                           tournamentDir, bot1.getName(), bot2.getName(), matchNumber);
+    private int calculateTotalMatches(int repetitions) {
+        int n = bots.size();
+        return (n * (n - 1) / 2) * repetitions;
+    }
+
+    private void runMatch(Player bot1, Player bot2, int currentMatch, int totalMatches, boolean fixedOrder) throws SQLException {
+        String logFilePath = String.format("%s/match_%d_%s_vs_%s.log", 
+                                           tournamentDir, currentMatch, bot1.getName(), bot2.getName());
         List<Player> players = fixedOrder ? List.of(bot1, bot2) : (Math.random() < 0.5 ? List.of(bot1, bot2) : List.of(bot2, bot1));
         GameEngine gameEngine = new GameEngine(players, logFilePath);
+
+        System.out.println("[" + (currentMatch) + "/" + totalMatches + "] " + bot1.getName() + " vs " + bot2.getName() + " Starting");
 
         while (!gameEngine.isGameOver()) {
             gameEngine.executeNextTurn();
@@ -92,7 +113,7 @@ public class TournamentManager {
         updateResults(bot1, bot2, winnerName);
 
         // Log match result
-        String result = String.format("Match %d between %s and %s: ", matchNumber, bot1.getName(), bot2.getName());
+        String result = "[" + (currentMatch) + "/" + totalMatches + "] " + bot1.getName() + " vs " + bot2.getName() + ": ";
         if ("Draw".equals(winnerName)) {
             result += "Draw";
         } else {
