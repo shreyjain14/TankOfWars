@@ -20,18 +20,13 @@ public class Position {
     }
 
     public Position move(Direction direction) {
-        switch (direction) {
-            case NORTH:
-                return new Position(x, y - 1);
-            case SOUTH:
-                return new Position(x, y + 1);
-            case EAST:
-                return new Position(x + 1, y);
-            case WEST:
-                return new Position(x - 1, y);
-            default:
-                throw new IllegalStateException("Unknown direction: " + direction);
-        }
+        return switch (direction) {
+            case NORTH -> new Position(x - 1, y);
+            case SOUTH -> new Position(x + 1, y);
+            case EAST -> new Position(x, y + 1);
+            case WEST -> new Position(x, y - 1);
+            default -> throw new IllegalStateException("Unknown direction: " + direction);
+        };
     }
 
     @Override

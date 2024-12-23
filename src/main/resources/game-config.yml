@@ -1,6 +1,6 @@
 board:
-  size: 5
-  obstacleDensity: 0.1
+  size: 10
+  obstacleDensity: 0.05
   fogOfWar:
     enabled: true
     viewRadius: 3  # Number of cells a tank can see in each direction
@@ -11,9 +11,9 @@ players:
   movesPerTurn: 3
   stalemateDetection:
     enabled: true
-    maxStateRepetitions: 4    # How many times a state can repeat before stalemate
-    maxUnchangedTurns: 10     # How many turns without changes before stalemate
-    turnsToCheck: 20          # How many past turns to check
+    maxStateRepetitions: 6    # Increase the number of times a state can repeat before stalemate
+    maxUnchangedTurns: 15     # Increase the number of turns without changes before stalemate
+    turnsToCheck: 30          # Increase the number of past turns to check
 
 tank:
   initialHealth: 100
@@ -22,7 +22,7 @@ tank:
 
 view:
   enabled: true        # Set to false for headless mode
-  clearScreen: false    # Set to false if terminal doesn't support ANSI clear
-  moveDelay: 500      # Milliseconds between moves
-  showHealth: true    # Show tank health in display
-  colorEnabled: true  # Set to false if terminal doesn't support ANSI colors
+  clearScreen: false   # Set to false if terminal doesn't support ANSI clear
+  moveDelay: 500       # Milliseconds between moves
+  showHealth: true     # Show tank health in display
+  colorEnabled: true   # Set to false if terminal doesn't support ANSI colors
