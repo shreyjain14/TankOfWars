@@ -18,7 +18,7 @@ public class Main {
         
     }
 
-    private static void runSimpleGame() {
+	private static void runSimpleGame() {
         Player bot1 = new ExampleBot("Bot1");
         Player bot2 = new ExampleBot("Bot2");
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));

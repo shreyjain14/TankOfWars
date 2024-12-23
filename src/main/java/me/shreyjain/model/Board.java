@@ -4,8 +4,6 @@ import me.shreyjain.config.GameConfig;
 import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Board {
     private final Cell[][] grid;
