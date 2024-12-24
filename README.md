@@ -1,3 +1,11 @@
+# Tank of War
+
+This project is a simple game engine for a tank of war game. 
+
+It is designed to be used for a hackathon. In this game, the player is a tank and the objective is to survive the longest.
+
+This game is where you can create your own bot and compete against other bots.
+
 ## Running the Game
 
 1. Clone the repository
