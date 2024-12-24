@@ -1,19 +1,17 @@
-package me.shreyjain.bot;
+package me.shreyjain.bot.extentions;
 
+import me.shreyjain.bot.BaseBot;
 import me.shreyjain.config.GameConfig;
 import me.shreyjain.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExampleBot implements Player {
-    private final String name;
-    private final Tank tank;
+public class ExampleBot extends BaseBot {
     private final Position centerPosition;
     private int stuckCounter = 0;
 
     public ExampleBot(String name) {
-        this.name = name;
-        this.tank = new Tank(GameConfig.getInitialTankHealth(), name);
+        super(name);
         this.centerPosition = new Position(
             GameConfig.getBoardSize() / 2,
             GameConfig.getBoardSize() / 2
@@ -153,15 +151,5 @@ public class ExampleBot implements Player {
                 return dy > 0 ? Direction.EAST : Direction.WEST;
             }
         }
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public Tank getTank() {
-        return tank;
     }
 } 
