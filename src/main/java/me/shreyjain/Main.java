@@ -1,6 +1,7 @@
 package me.shreyjain;
 
 import me.shreyjain.bot.extentions.ExampleBot;
+import me.shreyjain.bot.extensions.ExampleKotlinBot;
 import me.shreyjain.engine.GameEngine;
 import me.shreyjain.model.Player;
 import me.shreyjain.tournament.TournamentManager;
@@ -17,15 +18,15 @@ public class Main {
 
     public static void main(String[] args) {
         
-        // runSimpleGame();
-       runTournament();
+        runSimpleGame();
+//      runTournament();
         
     }
 
 	@SuppressWarnings("unused")
     private static void runSimpleGame() {
         Player bot1 = new ExampleBot("Bot1");
-        Player bot2 = new ExampleBot("Bot2");
+        Player bot2 = new ExampleKotlinBot("KotlinBot");
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
         String logFilePath = "logs/game_" + timestamp + ".log";
         GameEngine gameEngine = new GameEngine(List.of(bot1, bot2), logFilePath);
