@@ -1,3 +1,11 @@
+# Tank of War
+
+This project is a simple game engine for a tank of war game. 
+
+It is designed to be used for a hackathon. In this game, the player is a tank and the objective is to survive the longest.
+
+This game is where you can create your own bot and compete against other bots.
+
 ## Running the Game
 
 1. Clone the repository
@@ -14,9 +22,11 @@ All game events are logged to:
 ## For Hackathon Participants
 
 1. Fork this repository
-2. Create your bot by implementing the `Player` interface
-3. Test against the `ExampleBot`
+2. Create your bot by extending the `BaseBot` abstract class
+3. Test against the `ExampleBot` or your own bot
 4. Submit your bot for the tournament
+
+**See [HACKATHON.md](HACKATHON.md) for detailed instructions on creating and submitting your bot.**
 
 ## Tournament Features
 
