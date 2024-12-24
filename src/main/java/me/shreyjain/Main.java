@@ -9,8 +9,12 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main {
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
+
     public static void main(String[] args) {
         
         // runSimpleGame();
@@ -64,7 +68,7 @@ public class Main {
             TournamentManager tournamentManager = new TournamentManager(bots);
             tournamentManager.runTournament();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "An error occurred while running the tournament", e);
         }
     }
 }
