@@ -81,10 +81,6 @@ public class GameConfig {
         return getValue("view", "moveDelay");
     }
 
-    public static boolean shouldShowHealth() {
-        return getValue("view", "showHealth");
-    }
-
     public static boolean isColorEnabled() {
         return getValue("view", "colorEnabled");
     }
@@ -108,10 +104,6 @@ public class GameConfig {
 
     public static int getRoundRobinRepetitions() {
         return getValue("players", "roundRobinRepetitions");
-    }
-
-    public static int getMaxMoves() {
-        return (Integer) config.get("max_moves");
     }
 
     public static int getMaxTurns() {

@@ -154,7 +154,6 @@ public class GameEngine {
             if (turnCount >= maxTurns) {
                 System.out.println("Game declared a draw due to turn limit.");
                 gameOver = true;
-                return;
             }
         }
     }
@@ -275,6 +274,10 @@ public class GameEngine {
     }
 
     public boolean isStalemate() {
+        if (!GameConfig.isStalemateDetectionEnabled()) {
+            return false;
+        }
+
         if (previousStates.size() < GameConfig.getTurnsToCheck()) {
             return false;
         }

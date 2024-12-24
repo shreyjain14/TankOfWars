@@ -1,5 +1,7 @@
 package me.shreyjain.model;
 
+import me.shreyjain.config.GameConfig;
+
 public class Tank {
     private final int initialHealth;
     private int health;
@@ -7,8 +9,8 @@ public class Tank {
     private Direction direction;
     private final String name;
 
-    public Tank(int initialHealth, String name) {
-        this.initialHealth = initialHealth;
+    public Tank(String name) {
+        this.initialHealth = GameConfig.getInitialTankHealth();
         this.health = initialHealth;
         this.direction = Direction.NORTH; // Default direction
         this.name = name;
