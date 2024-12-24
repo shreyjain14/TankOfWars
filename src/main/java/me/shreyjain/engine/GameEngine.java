@@ -124,8 +124,10 @@ public class GameEngine {
             board.getBoardState(currentPlayer.getTank().getPosition())
         );
 
-        // Execute each move and show the result
-        for (Move move : moves) {
+        // Limit the number of moves to execute to movesPerTurn
+        int movesPerTurn = GameConfig.getMovesPerTurn();
+        for (int i = 0; i < Math.min(moves.size(), movesPerTurn); i++) {
+            Move move = moves.get(i);
             executeMove(currentPlayer, move);
             String moveMessage = currentPlayer.getName() + " executed " + move;
             logger.log(moveMessage);
