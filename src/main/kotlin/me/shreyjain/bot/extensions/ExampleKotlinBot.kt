@@ -9,6 +9,8 @@ class ExampleKotlinBot(name: String) : BaseBot(name) {
     override fun getNextMoves(boardState: BoardState): List<Move> {
         val moves = mutableListOf<Move>()
 
+        // Only the first N MOVE_FORWARD would be executed
+        // where N = player.movesPerTurn in the game-config.yml
         moves.add(Move.MOVE_FORWARD)
         moves.add(Move.MOVE_FORWARD)
         moves.add(Move.MOVE_FORWARD)
