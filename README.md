@@ -22,11 +22,16 @@ All game events are logged to:
 ## For Hackathon Participants
 
 1. Fork this repository
-2. Create your bot by extending the `BaseBot` abstract class
-3. Test against the `ExampleBot` or your own bot
+2. Create your bot by implementing the `Player` interface
+3. Test against the `ExampleBot` or `ExampleKotlinBot`
 4. Submit your bot for the tournament
 
 **See [HACKATHON.md](HACKATHON.md) for detailed instructions on creating and submitting your bot.**
+
+## Kotlin Support
+
+You can also create bots in Kotlin. Ensure your environment is set up to compile Kotlin code.
+Take a look at the `ExampleKotlinBot` for an example.
 
 ## Tournament Features
 
