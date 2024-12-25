@@ -108,6 +108,13 @@ public class GameEngine {
         }
 
         Player currentPlayer = players.get(currentPlayerIndex);
+        
+        // Skip turn if tank is destroyed
+        if (currentPlayer.getTank().isDestroyed()) {
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+            return;
+        }
+        
         logger.log("Starting turn for " + currentPlayer.getName());
         
         // Render all views
@@ -172,6 +179,13 @@ public class GameEngine {
 
     private void executeMove(Player player, Move move) {
         Tank tank = player.getTank();
+        
+        // Don't execute moves for destroyed tanks
+        if (tank.isDestroyed()) {
+            logger.log(player.getName() + " is destroyed and cannot execute moves");
+            return;
+        }
+        
         Position currentPos = tank.getPosition();
         Direction currentDir = tank.getDirection();
         
