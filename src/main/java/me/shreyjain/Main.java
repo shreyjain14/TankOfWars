@@ -26,10 +26,12 @@ public class Main {
 	@SuppressWarnings("unused")
     private static void runSimpleGame() {
         Player bot1 = new ExampleBot("Bot1");
-        Player bot2 = new ExampleKotlinBot("KotlinBot");
+        Player bot2 = new ExampleBot("Bot2");
+        Player bot3 = new ExampleBot("Bot3");
+        Player botKotlin = new ExampleKotlinBot("KotlinBot");
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
         String logFilePath = "logs/game_" + timestamp + ".log";
-        GameEngine gameEngine = new GameEngine(List.of(bot1, bot2), logFilePath);
+        GameEngine gameEngine = new GameEngine(List.of(bot1, bot2, bot3, botKotlin), logFilePath);
 
         while (!gameEngine.isGameOver()) {
             gameEngine.executeNextTurn();
