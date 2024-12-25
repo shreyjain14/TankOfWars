@@ -66,23 +66,34 @@ public class GameEngine {
     private void placeTanks() {
         int boardSize = GameConfig.getBoardSize();
         List<Position> startPositions = new ArrayList<>();
+        List<Direction> startDirections = new ArrayList<>();
 
         if (players.size() == 2) {
             // For 2 players, place them at (0, 0) and (N, N)
             startPositions.add(new Position(0, 0));
             startPositions.add(new Position(boardSize - 1, boardSize - 1));
+            startDirections.add(Direction.SOUTH);  // (0,0) faces south
+            startDirections.add(Direction.NORTH);  // (N,N) faces north
         } else {
-            // For more players, use the corners
-            startPositions.add(new Position(0, 0));
-            startPositions.add(new Position(0, boardSize - 1));
-            startPositions.add(new Position(boardSize - 1, 0));
-            startPositions.add(new Position(boardSize - 1, boardSize - 1));
+            // For more players, use the corners with specific directions
+            startPositions.add(new Position(0, 0));                    // Top-left
+            startPositions.add(new Position(0, boardSize - 1));        // Top-right
+            startPositions.add(new Position(boardSize - 1, 0));        // Bottom-left
+            startPositions.add(new Position(boardSize - 1, boardSize - 1)); // Bottom-right
+            
+            startDirections.add(Direction.SOUTH);  // (0,0) faces south
+            startDirections.add(Direction.WEST);   // (0,N) faces west
+            startDirections.add(Direction.EAST);   // (N,0) faces east
+            startDirections.add(Direction.NORTH);  // (N,N) faces north
         }
 
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             Position startPos = startPositions.get(i);
-            board.placeTank(player.getTank(), startPos);
+            Direction startDir = startDirections.get(i);
+            Tank tank = player.getTank();
+            tank.setDirection(startDir);  // Set direction before placing tank
+            board.placeTank(tank, startPos);
         }
     }
 
@@ -98,6 +109,13 @@ public class GameEngine {
         }
 
         Player currentPlayer = players.get(currentPlayerIndex);
+        
+        // Skip turn if tank is destroyed
+        if (currentPlayer.getTank().isDestroyed()) {
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+            return;
+        }
+        
         logger.log("Starting turn for " + currentPlayer.getName());
         
         // Render all views
@@ -162,6 +180,13 @@ public class GameEngine {
 
     private void executeMove(Player player, Move move) {
         Tank tank = player.getTank();
+        
+        // Don't execute moves for destroyed tanks
+        if (tank.isDestroyed()) {
+            logger.log(player.getName() + " is destroyed and cannot execute moves");
+            return;
+        }
+        
         Position currentPos = tank.getPosition();
         Direction currentDir = tank.getDirection();
         
