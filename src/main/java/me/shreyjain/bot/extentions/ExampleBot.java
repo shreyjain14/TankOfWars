@@ -23,7 +23,7 @@ public class ExampleBot extends BaseBot {
         List<Move> moves = new ArrayList<>();
         Position currentPos = tank.getPosition();
         Direction currentDirection = tank.getDirection();
-
+        
         // First priority: Shoot if enemy is in sight
         Tank enemyTank = findEnemyTankInSight(boardState);
         if (enemyTank != null) {
