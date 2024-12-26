@@ -16,7 +16,7 @@ public abstract class BaseBot implements Player {
         this.name = name;
         this.tank = new Tank(name);
 
-        this.players.add(this);
+        Player.players.add(this);
 
     }
 
