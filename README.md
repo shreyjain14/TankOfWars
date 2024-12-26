@@ -11,19 +11,25 @@ This game is where you can create your own bot and compete against other bots.
 1. Clone the repository
 2. Build with Maven
 3. Run `Main.java`
-4. Check `logs/latest.log` for game details
+4. Check `logs/` for game details
 
 ## Logging
 
 All game events are logged to:
 - `logs/game_YYYY-MM-DD_HH-mm-ss.log` (individual games)
-- `logs/latest.log` (most recent game)
+- `tournament_logs/Tournament_YYYY-MM-DD_HH-mm-ss/` (tournament games)
 
 ## For Hackathon Participants
 
 1. Fork this repository
-2. Create your bot by implementing the `Player` interface
-3. Test against the `ExampleBot` or `ExampleKotlinBot`
+2. Create your bot by extending the 
+[`BaseBot`](src/main/java/me/shreyjain/bot/BaseBot.java)
+(Take a look at 
+[`ExampleBot`](src/main/java/me/shreyjain/bot/extentions/ExampleBot.java) or 
+[`ExampleKotlinBot`](src/main/kotlin/me/shreyjain/bot/extensions/ExampleKotlinBot.kt))
+3. Test against the
+[`ExampleBot`](src/main/java/me/shreyjain/bot/extentions/ExampleBot.java) or
+[`ExampleKotlinBot`](src/main/kotlin/me/shreyjain/bot/extensions/ExampleKotlinBot.kt)
 4. Submit your bot for the tournament
 
 **See [HACKATHON.md](HACKATHON.md) for detailed instructions on creating and submitting your bot.**
@@ -31,7 +37,9 @@ All game events are logged to:
 ## Kotlin Support
 
 You can also create bots in Kotlin. Ensure your environment is set up to compile Kotlin code.
-Take a look at the `ExampleKotlinBot` for an example.
+Take a look at the
+[`ExampleKotlinBot`](src/main/kotlin/me/shreyjain/bot/extensions/ExampleKotlinBot.kt)
+for an example.
 
 ## Tournament Features
 
