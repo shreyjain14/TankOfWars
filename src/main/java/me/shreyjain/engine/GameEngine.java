@@ -5,10 +5,7 @@ import me.shreyjain.model.*;
 import me.shreyjain.util.GameLogger;
 import me.shreyjain.view.GameRenderer;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class GameEngine {
     private final Board board;
@@ -68,25 +65,38 @@ public class GameEngine {
         int boardSize = GameConfig.getBoardSize();
         List<Position> startPositions = new ArrayList<>();
         List<Direction> startDirections = new ArrayList<>();
+        List<Direction> allDirections = List.of(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST);
+        Random random = new Random();
 
         if (players.size() == 2) {
             // For 2 players, place them at (0, 0) and (N, N)
             startPositions.add(new Position(0, 0));
             startPositions.add(new Position(boardSize - 1, boardSize - 1));
-            startDirections.add(Direction.SOUTH);  // (0,0) faces south
-            startDirections.add(Direction.NORTH);  // (N,N) faces north
+            startDirections.add(allDirections.get(random.nextInt(allDirections.size())));  // (0,0) faces south
+            startDirections.add(allDirections.get(random.nextInt(allDirections.size())));  // (N,N) faces north
         } else {
             // For more players, use the corners with specific directions
-            startPositions.add(new Position(0, 0));                    // Top-left
-            startPositions.add(new Position(0, boardSize - 1));        // Top-right
-            startPositions.add(new Position(boardSize - 1, 0));        // Bottom-left
-            startPositions.add(new Position(boardSize - 1, boardSize - 1)); // Bottom-right
-            
-            startDirections.add(Direction.SOUTH);  // (0,0) faces south
-            startDirections.add(Direction.WEST);   // (0,N) faces west
-            startDirections.add(Direction.EAST);   // (N,0) faces east
-            startDirections.add(Direction.NORTH);  // (N,N) faces north
+            List<Position> allPositions = new ArrayList<>();
+            Set<Position> usedPositions = new HashSet<>();
+
+            int count = 0;
+
+            while (count < players.size()) {
+                int x = random.nextInt(boardSize);
+                int y = random.nextInt(boardSize);
+                Position pos = new Position(x, y);
+
+                // Ensure unique positions
+                if (!usedPositions.contains(pos)) {
+                    usedPositions.add(pos);
+                    startPositions.add(pos);
+                    count++;
+                    startDirections.add(allDirections.get(random.nextInt(allDirections.size())));
+
+                }
+            }
         }
+
 
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);

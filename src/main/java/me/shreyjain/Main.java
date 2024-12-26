@@ -19,7 +19,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         // Uncomment this section to run Simple Game with Example Bot
         int currentGamePlayers = GameConfig.getCurrentGamePlayers();
 
@@ -30,7 +29,7 @@ public class Main {
 
 
         // for testing
-        for (int i=0; i<currentGamePlayers; i++) {
+        for (int i=0; i<currentGamePlayers-1; i++) {
             new ExampleBot("Bot" + (i+1));
         }
 
