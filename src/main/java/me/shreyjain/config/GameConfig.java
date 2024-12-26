@@ -115,7 +115,7 @@ public class GameConfig {
     }
 
     public static int getMinTournamentPlayers() {
-        return getValue("game", "tournament", "minTournament");
+        return (Integer) getValue("game", "tournament", "min");
     }
 
     public static boolean getTournamentEnabled() {
