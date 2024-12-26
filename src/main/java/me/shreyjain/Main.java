@@ -10,8 +10,6 @@ import me.shreyjain.tournament.TournamentManager;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,8 +17,27 @@ public class Main {
     private static final Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-        
+
+
+        //Uncomment this section to run Simple Game with Example Bot
+        int currentGamePlayers = GameConfig.getCurrentGamePlayers();
+        Player bot;
+
+        for (int i =0;i<currentGamePlayers;i++) {
+            bot = new ExampleBot("Bot" + (i+1));
+//            Player.players.add(bot);
+        }
+
         runSimpleGame();
+
+        //Uncomment this section to play Tournament with Example Bot
+//        int tournamentGamePlayers = GameConfig.getTournamentGamePlayers();
+//        Player bot;
+//
+//        for (int i = 0; i< tournamentGamePlayers; i++) {
+//            bot = new ExampleBot("Bot" + (i + 1));
+//            Player.players.add(bot);
+//        }
 //      runTournament();
         
     }
@@ -28,28 +45,17 @@ public class Main {
 	@SuppressWarnings("unused")
     private static void runSimpleGame() {
 
-        int currentGamePlayers = GameConfig.getCurrentGamePlayers();
-
-        if (currentGamePlayers < GameConfig.getMinPlayers() || currentGamePlayers > GameConfig.getMaxPlayers()) {
+        if (Player.players.size() < GameConfig.getMinPlayers() || Player.players.size() > GameConfig.getMaxPlayers()) {
             throw new IllegalArgumentException("Invalid number of players");
         }
-
-        List<Player> player = new ArrayList<>();
-        Player bot;
-
-        for (int i =0;i<currentGamePlayers;i++) {
-            bot = new ExampleBot("Bot" + (i+1));
-            player.add(bot);
-        }
-
 //        Player bot1 = new ExampleBot("Bot1");
 //        Player bot2 = new ExampleBot("Bot2");
 //        Player bot3 = new ExampleBot("Bot3");
         Player botKotlin = new ExampleKotlinBot("KotlinBot");
-        player.add(botKotlin);
+        Player.players.add(botKotlin);
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
         String logFilePath = "logs/game_" + timestamp + ".log";
-        GameEngine gameEngine = new GameEngine(player, logFilePath);
+        GameEngine gameEngine = new GameEngine(Player.players, logFilePath);
 
         while (!gameEngine.isGameOver()) {
             gameEngine.executeNextTurn();
@@ -60,19 +66,13 @@ public class Main {
     private static void runTournament() {
         try {
 
-            int tournamentGamePlayers = GameConfig.getTournamentGamePlayers();
 
-            if (tournamentGamePlayers < GameConfig.getMinTournamentPlayers() || tournamentGamePlayers > GameConfig.getMaxTournamentPlayers()) {
+
+            if (Player.players.size() < GameConfig.getMinTournamentPlayers() || Player.players.size() > GameConfig.getMaxTournamentPlayers()) {
                 throw new IllegalArgumentException("Invalid number of players in the tournament");
             }
 
-            List<Player> bots = new ArrayList<>();
-            Player bot;
 
-            for (int i = 0; i< tournamentGamePlayers; i++) {
-                bot = new ExampleBot("Bot" + (i+1));
-                bots.add(bot);
-            }
 
 
 //            List<Player> bots = List.of(
@@ -103,7 +103,7 @@ public class Main {
 //                new ExampleBot("Bot25")
 //            );
 
-            TournamentManager tournamentManager = new TournamentManager(bots);
+            TournamentManager tournamentManager = new TournamentManager(Player.players);
             tournamentManager.runTournament();
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "An error occurred while running the tournament", e);
