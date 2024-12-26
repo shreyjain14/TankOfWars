@@ -109,4 +109,13 @@ public class GameConfig {
     public static int getMaxTurns() {
         return (Integer) config.get("max_turns");
     }
+
+    public static int getCurrentGamePlayers() { return getValue("players", "currentGamePlayers");}
+
+    public static int getTournamentGamePlayers() { return getValue("players", "tournamentGamePlayer");}
+
+    public static int getMinTournamentPlayers() { return getValue("players", "minTournament");}
+
+    public static int getMaxTournamentPlayers() { return getValue("players", "maxTournament");}
+
 } 

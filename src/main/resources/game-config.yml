@@ -8,6 +8,10 @@ board:
 players:
   min: 2
   max: 4
+  currentGamePlayers: 3
+  tournamentGamePlayer: 4
+  minTournament: 2
+  maxTournament: 30
   movesPerTurn: 3
   stalemateDetection:
     enabled: true

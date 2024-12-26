@@ -25,9 +25,9 @@ public class GameEngine {
     private final int maxTurns;
 
     public GameEngine(List<Player> players, String logFilePath) {
-        if (players.size() < GameConfig.getMinPlayers() || players.size() > GameConfig.getMaxPlayers()) {
-            throw new IllegalArgumentException("Invalid number of players");
-        }
+//        if (players.size() < GameConfig.getMinPlayers() || players.size() > GameConfig.getMaxPlayers()) {
+//            throw new IllegalArgumentException("Invalid number of players");
+//        }
         this.board = new Board(GameConfig.getBoardSize());
         this.players = new ArrayList<>(players);
         this.currentPlayerIndex = 0;
