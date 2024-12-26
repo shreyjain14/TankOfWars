@@ -6,7 +6,13 @@ Welcome to the hackathon! This guide will help you create your own bot using the
 
 ### BaseBot Class
 
-The `BaseBot` class is an abstract class that implements the `Player` interface. It provides the basic structure for your bot, including a `Tank` object and a name.
+The
+[`BaseBot`](src/main/java/me/shreyjain/bot/BaseBot.java)
+class is an abstract class that implements the 
+[`Player`](src/main/java/me/shreyjain/model/Player.java)
+interface. It provides the basic structure for your bot, including a 
+[`Tank`](src/main/java/me/shreyjain/model/Tank.java)
+object and a name.
 
 ```java
 public abstract class BaseBot implements Player {
@@ -35,7 +41,10 @@ public abstract class BaseBot implements Player {
 
 ### Implementing Your Bot
 
-To create your bot, extend the `BaseBot` class and implement the `getNextMoves` method. This method should return a list of moves your bot will execute each turn.
+To create your bot, extend the
+[`BaseBot`](src/main/java/me/shreyjain/bot/BaseBot.java)
+class and implement the `getNextMoves` method. 
+This method should return a list of moves your bot will execute each turn.
 
 ```java
 public class MyBot extends BaseBot {
@@ -48,6 +57,8 @@ public class MyBot extends BaseBot {
         // Implement your bot's strategy here
         List<Move> moves = new ArrayList<>();
         // Example: Add logic to decide moves
+        // Only first N moves will execute depending 
+        // on the `game-config.yml`
         return moves;
     }
 }
@@ -60,15 +71,17 @@ public class MyBot extends BaseBot {
 
 ## Step 3: Testing Your Bot
 
-1. **Modify `Main.java`**: Add your bot to the list of players in the `runSimpleGame` or `runTournament` method.
+1. **Modify `Main.java`**: Create a new Instance of your bot (at line 30)
 
 ```java
-Player myBot = new MyBot("MyBot");
-List<Player> bots = List.of(
-    myBot,
-    new ExampleBot("ExampleBot")
-    // Add more bots as needed
-);
+// Create new Bots here
+
+// new ExampleBot("ExampleBot")
+// new KotlinBot("KotlinBot")
+
+// add your bot here
+new TeamABCBot("Team ABC Bot");
+
 ```
 
 2. **Run the Game**: Execute the `Main` class to test your bot against others.
