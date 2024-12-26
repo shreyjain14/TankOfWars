@@ -15,6 +15,9 @@ public abstract class BaseBot implements Player {
     protected BaseBot (String name) {
         this.name = name;
         this.tank = new Tank(name);
+
+        Player.players.add(this);
+
     }
 
     @Override
@@ -29,4 +32,7 @@ public abstract class BaseBot implements Player {
     public Tank getTank() {
         return tank;
     }
+
+
+
 }

@@ -63,6 +63,7 @@ public class GameEngine {
         logger.log("Obstacles at positions: " + obstacles);
     }
 
+    //Need to Check this
     private void placeTanks() {
         int boardSize = GameConfig.getBoardSize();
         List<Position> startPositions = new ArrayList<>();

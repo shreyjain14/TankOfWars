@@ -87,35 +87,39 @@ public class GameConfig {
 
     // Stalemate detection settings
     public static boolean isStalemateDetectionEnabled() {
-        return getValue("players", "stalemateDetection", "enabled");
+        return getValue("game", "stalemateDetection", "enabled");
     }
 
     public static int getMaxStateRepetitions() {
-        return getValue("players", "stalemateDetection", "maxStateRepetitions");
+        return getValue("game", "stalemateDetection", "maxStateRepetitions");
     }
 
     public static int getMaxUnchangedTurns() {
-        return getValue("players", "stalemateDetection", "maxUnchangedTurns");
+        return getValue("game", "stalemateDetection", "maxUnchangedTurns");
     }
 
     public static int getTurnsToCheck() {
-        return getValue("players", "stalemateDetection", "turnsToCheck");
+        return getValue("game", "stalemateDetection", "turnsToCheck");
     }
 
     public static int getRoundRobinRepetitions() {
-        return getValue("players", "roundRobinRepetitions");
+        return getValue("game", "tournament", "roundRobinRepetitions");
     }
 
     public static int getMaxTurns() {
         return (Integer) config.get("max_turns");
     }
 
-    public static int getCurrentGamePlayers() { return getValue("players", "currentGamePlayers");}
+    public static int getCurrentGamePlayers() {
+        return getValue("game", "currentPlayers");
+    }
 
-    public static int getTournamentGamePlayers() { return getValue("players", "tournamentGamePlayer");}
+    public static int getMinTournamentPlayers() {
+        return getValue("game", "tournament", "minTournament");
+    }
 
-    public static int getMinTournamentPlayers() { return getValue("players", "minTournament");}
-
-    public static int getMaxTournamentPlayers() { return getValue("players", "maxTournament");}
+    public static boolean getTournamentEnabled() {
+        return getValue("game", "tournament", "enabled");
+    }
 
 } 

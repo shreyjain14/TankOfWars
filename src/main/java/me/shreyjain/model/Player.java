@@ -1,5 +1,6 @@
 package me.shreyjain.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Player {
@@ -11,6 +12,9 @@ public interface Player {
      * @return List of moves to execute this turn
      */
     List<Move> getNextMoves(BoardState boardState);
+
+    // List to add the Players for both Simple Game and Tournament. Each Player can use this static list to add their bots.
+    static List<Player> players = new ArrayList<>();
 
     /**
      * Gets the player's name/identifier
