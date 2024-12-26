@@ -33,11 +33,18 @@ public class Main {
             new ExampleBot("Bot" + (i+1));
         }
 
+        long startTime = System.nanoTime();
+
         if (GameConfig.getTournamentEnabled()) {
             runTournament();
         } else {
             runSimpleGame();
         }
+
+        long endTime = System.nanoTime();
+        long executionTime = (endTime - startTime) / 1000000;
+
+        System.out.println("It took " + executionTime + " ms.");
 
     }
 
