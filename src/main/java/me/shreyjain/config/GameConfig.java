@@ -8,6 +8,7 @@ public class GameConfig {
     private static final Map<String, Object> config;
 
     static {
+
         try (InputStream inputStream = GameConfig.class
                 .getClassLoader()
                 .getResourceAsStream("game-config.yml")) {
