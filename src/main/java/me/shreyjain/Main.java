@@ -29,7 +29,7 @@ public class Main {
 
 
         // for testing
-        for (int i=0; i<currentGamePlayers-1; i++) {
+        for (int i=0; i<currentGamePlayers; i++) {
             new ExampleBot("Bot" + (i+1));
         }
 
@@ -47,8 +47,6 @@ public class Main {
         if (Player.players.size() < GameConfig.getMinPlayers() || Player.players.size() > GameConfig.getMaxPlayers()) {
             throw new IllegalArgumentException("Invalid number of players");
         }
-
-        Player botKotlin = new ExampleKotlinBot("KotlinBot");
 
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
         String logFilePath = "logs/game_" + timestamp + ".log";
