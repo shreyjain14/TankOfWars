@@ -6,11 +6,11 @@ board:
     viewRadius: 3  # Number of cells a tank can see in each direction
 
 game:
-  currentPlayers: 4         # For testing this add X Example Bots
+  currentPlayers: 5         # For testing this add X Example Bots
   tournament:
-    enabled: false
+    enabled: true
     min: 2
-    roundRobinRepetitions: 5      # Number of times each pair plays
+    roundRobinRepetitions: 3      # Number of times each pair plays
   stalemateDetection:
     enabled: true
     maxStateRepetitions: 10    # Number of times a state can repeat before stalemate
@@ -29,7 +29,7 @@ tank:
   damagePerShot: 25
 
 view:
-  enabled: true       # Set to false for headless mode
+  enabled: false       # Set to false for headless mode
   clearScreen: true   # Set to false if terminal doesn't support ANSI clear
   moveDelay: 250       # Milliseconds between moves
   colorEnabled: true   # Set to false if terminal doesn't support ANSI colors

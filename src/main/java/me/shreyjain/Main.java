@@ -45,10 +45,11 @@ public class Main {
         long executionTime = (endTime - startTime) / 1000000;
 
         System.out.println("It took " + executionTime + " ms.");
+        logger.config("It took " + executionTime + " ms.");
 
     }
 
-	@SuppressWarnings("unused")
+
     private static void runSimpleGame() {
 
         if (Player.players.size() < GameConfig.getMinPlayers() || Player.players.size() > GameConfig.getMaxPlayers()) {
@@ -65,7 +66,6 @@ public class Main {
         }
     }
 
-    @SuppressWarnings("unused")
     private static void runTournament() {
         try {
 
