@@ -1,8 +1,8 @@
 package me.shreyjain.bot.extensions
 
 import me.shreyjain.bot.BaseBot
-import me.shreyjain.model.BoardState
-import me.shreyjain.model.Move
+import me.shreyjain.engine.BoardState
+import me.shreyjain.engine.Move
 
 class ExampleKotlinBot(name: String) : BaseBot(name) {
 

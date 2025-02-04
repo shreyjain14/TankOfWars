@@ -1,4 +1,4 @@
-package me.shreyjain.model;
+package me.shreyjain.engine;
 
 import me.shreyjain.config.GameConfig;
 
@@ -16,7 +16,7 @@ public class Tank {
         this.name = name;
     }
 
-    public void reset() {
+    void reset() {
         this.health = initialHealth;
         this.position = null; // or initial position if needed
         this.direction = Direction.NORTH; // or initial direction if needed
@@ -34,7 +34,7 @@ public class Tank {
         return position;
     }
 
-    public void setPosition(Position position) {
+    void setPosition(Position position) {
         this.position = position;
     }
 
@@ -42,7 +42,7 @@ public class Tank {
         return direction;
     }
 
-    public void setDirection(Direction direction) {
+    void setDirection(Direction direction) {
         this.direction = direction;
     }
 

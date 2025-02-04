@@ -9,9 +9,9 @@ Welcome to the hackathon! This guide will help you create your own bot using the
 The
 [`BaseBot`](src/main/java/me/shreyjain/bot/BaseBot.java)
 class is an abstract class that implements the 
-[`Player`](src/main/java/me/shreyjain/model/Player.java)
+[`Player`](src/main/java/me/shreyjain/engine/Player.java)
 interface. It provides the basic structure for your bot, including a 
-[`Tank`](src/main/java/me/shreyjain/model/Tank.java)
+[`Tank`](src/main/java/me/shreyjain/engine/Tank.java)
 object and a name.
 
 ```java

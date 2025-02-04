@@ -1,7 +1,5 @@
-package me.shreyjain.tournament;
+package me.shreyjain.engine;
 
-import me.shreyjain.engine.GameEngine;
-import me.shreyjain.model.Player;
 import me.shreyjain.util.GameLogger;
 import me.shreyjain.config.GameConfig;
 

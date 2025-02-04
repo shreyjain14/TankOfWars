@@ -1,7 +1,7 @@
 package me.shreyjain.view;
 
 import me.shreyjain.config.GameConfig;
-import me.shreyjain.model.*;
+import me.shreyjain.engine.*;
 
 import java.util.List;
 

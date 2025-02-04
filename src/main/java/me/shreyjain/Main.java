@@ -4,13 +4,12 @@ import me.shreyjain.bot.extentions.ExampleBot;
 import me.shreyjain.bot.extensions.ExampleKotlinBot;
 import me.shreyjain.config.GameConfig;
 import me.shreyjain.engine.GameEngine;
-import me.shreyjain.model.Player;
-import me.shreyjain.tournament.TournamentManager;
+import me.shreyjain.engine.Player;
+import me.shreyjain.engine.TournamentManager;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,14 +23,14 @@ public class Main {
 
         // Create new Bots here
 
-        // new ExampleBot("ExampleBot")
-        // new KotlinBot("KotlinBot")
+         new ExampleBot("ExampleBot");
+         new ExampleKotlinBot("ExampleKotlinBot");
 
 
         // for testing
-        for (int i=0; i<currentGamePlayers; i++) {
-            new ExampleBot("Bot" + (i+1));
-        }
+//        for (int i=0; i<currentGamePlayers; i++) {
+//            new ExampleBot("Bot" + (i+1));
+//        }
 
         long startTime = System.nanoTime();
 

@@ -1,7 +1,6 @@
 package me.shreyjain.engine;
 
 import me.shreyjain.config.GameConfig;
-import me.shreyjain.model.*;
 import me.shreyjain.util.GameLogger;
 import me.shreyjain.view.GameRenderer;
 

@@ -1,9 +1,9 @@
 package me.shreyjain.bot;
 
-import me.shreyjain.model.BoardState;
-import me.shreyjain.model.Move;
-import me.shreyjain.model.Player;
-import me.shreyjain.model.Tank;
+import me.shreyjain.engine.BoardState;
+import me.shreyjain.engine.Move;
+import me.shreyjain.engine.Player;
+import me.shreyjain.engine.Tank;
 
 import java.util.List;
 

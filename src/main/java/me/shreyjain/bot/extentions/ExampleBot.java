@@ -2,7 +2,7 @@ package me.shreyjain.bot.extentions;
 
 import me.shreyjain.bot.BaseBot;
 import me.shreyjain.config.GameConfig;
-import me.shreyjain.model.*;
+import me.shreyjain.engine.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +16,7 @@ public class ExampleBot extends BaseBot {
             GameConfig.getBoardSize() / 2,
             GameConfig.getBoardSize() / 2
         );
+
     }
 
     @Override

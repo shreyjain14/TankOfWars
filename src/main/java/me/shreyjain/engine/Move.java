@@ -1,4 +1,4 @@
-package me.shreyjain.model;
+package me.shreyjain.engine;
 
 public enum Move {
     MOVE_FORWARD,

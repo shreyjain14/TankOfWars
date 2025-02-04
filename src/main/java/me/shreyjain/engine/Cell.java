@@ -1,4 +1,4 @@
-package me.shreyjain.model;
+package me.shreyjain.engine;
 
 public class Cell {
     private Tank tank;

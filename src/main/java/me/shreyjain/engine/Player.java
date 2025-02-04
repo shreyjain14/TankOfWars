@@ -1,4 +1,4 @@
-package me.shreyjain.model;
+package me.shreyjain.engine;
 
 import java.util.ArrayList;
 import java.util.List;
