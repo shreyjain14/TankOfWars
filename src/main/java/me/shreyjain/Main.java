@@ -21,14 +21,14 @@ public class Main {
         
         // Create new Bots here
         
-        new ExampleBot();
-        new ExampleKotlinBot();
+//        new ExampleBot();
+//        new ExampleKotlinBot();
 
         // for testing
-//        int currentGamePlayers = GameConfig.getCurrentGamePlayers();
-//        for (int i=0; i<currentGamePlayers; i++) {
-//            new ExampleBot("Bot" + (i+1));
-//        }
+        int currentGamePlayers = GameConfig.getCurrentGamePlayers();
+        for (int i=0; i<currentGamePlayers; i++) {
+            new ExampleBot("Bot" + (i+1));
+        }
 
         long startTime = System.nanoTime();
 
