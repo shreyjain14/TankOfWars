@@ -2,7 +2,6 @@ package me.shreyjain;
 
 import me.shreyjain.bot.extentions.ExampleBot;
 import me.shreyjain.bot.extensions.ExampleKotlinBot;
-import me.shreyjain.bot.extentions.ShreyBot;
 import me.shreyjain.config.GameConfig;
 import me.shreyjain.engine.GameEngine;
 import me.shreyjain.engine.Player;
