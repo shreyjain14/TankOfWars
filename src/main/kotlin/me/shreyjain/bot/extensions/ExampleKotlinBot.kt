@@ -4,7 +4,7 @@ import me.shreyjain.bot.BaseBot
 import me.shreyjain.engine.BoardState
 import me.shreyjain.engine.Move
 
-class ExampleKotlinBot(name: String) : BaseBot(name) {
+class ExampleKotlinBot() : BaseBot("ExampleKotlinBot") {
 
     override fun getNextMoves(boardState: BoardState): List<Move> {
         val moves = mutableListOf<Move>()

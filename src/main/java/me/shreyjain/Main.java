@@ -2,6 +2,7 @@ package me.shreyjain;
 
 import me.shreyjain.bot.extentions.ExampleBot;
 import me.shreyjain.bot.extensions.ExampleKotlinBot;
+import me.shreyjain.bot.extentions.ShreyBot;
 import me.shreyjain.config.GameConfig;
 import me.shreyjain.engine.GameEngine;
 import me.shreyjain.engine.Player;
@@ -18,16 +19,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Uncomment this section to run Simple Game with Example Bot
-        int currentGamePlayers = GameConfig.getCurrentGamePlayers();
-
+        
         // Create new Bots here
-
-         new ExampleBot("ExampleBot");
-         new ExampleKotlinBot("ExampleKotlinBot");
-
+        
+        new ExampleBot();
+        new ExampleKotlinBot();
 
         // for testing
+//        int currentGamePlayers = GameConfig.getCurrentGamePlayers();
 //        for (int i=0; i<currentGamePlayers; i++) {
 //            new ExampleBot("Bot" + (i+1));
 //        }
@@ -44,7 +43,6 @@ public class Main {
         long executionTime = (endTime - startTime) / 1000000;
 
         System.out.println("It took " + executionTime + " ms.");
-        logger.config("It took " + executionTime + " ms.");
 
     }
 

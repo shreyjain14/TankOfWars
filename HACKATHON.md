@@ -8,9 +8,9 @@ Welcome to the hackathon! This guide will help you create your own bot using the
 
 The
 [`BaseBot`](src/main/java/me/shreyjain/bot/BaseBot.java)
-class is an abstract class that implements the 
+class is an abstract class that implements the
 [`Player`](src/main/java/me/shreyjain/engine/Player.java)
-interface. It provides the basic structure for your bot, including a 
+interface. It provides the basic structure for your bot, including a
 [`Tank`](src/main/java/me/shreyjain/engine/Tank.java)
 object and a name.
 
@@ -43,13 +43,13 @@ public abstract class BaseBot implements Player {
 
 To create your bot, extend the
 [`BaseBot`](src/main/java/me/shreyjain/bot/BaseBot.java)
-class and implement the `getNextMoves` method. 
+class and implement the `getNextMoves` method.
 This method should return a list of moves your bot will execute each turn.
 
 ```java
 public class MyBot extends BaseBot {
-    public MyBot(String name) {
-        super(name);
+    public MyBot() {
+        super("YourBotName"); // Avoid Adding Spaces to your name
     }
 
     @Override
@@ -57,7 +57,7 @@ public class MyBot extends BaseBot {
         // Implement your bot's strategy here
         List<Move> moves = new ArrayList<>();
         // Example: Add logic to decide moves
-        // Only first N moves will execute depending 
+        // Only first N moves will execute depending
         // on the `game-config.yml`
         return moves;
     }
@@ -80,11 +80,14 @@ public class MyBot extends BaseBot {
 // new KotlinBot("KotlinBot")
 
 // add your bot here
-new TeamABCBot("Team ABC Bot");
+new TeamABCBot();
 
 ```
 
-2. **Run the Game**: Execute the `Main` class to test your bot against others.
+2. **Run the Game**:
+
+- Execute the `Main` class to test your bot against others.
+- If you are using termimal to run use the following command `./mvnw clean compile exec:java "-Dexec.mainClass=me.shreyjain.Main"`
 
 ## Step 4: Submitting Your Bot
 

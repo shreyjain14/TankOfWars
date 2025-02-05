@@ -10,8 +10,8 @@ public class ExampleBot extends BaseBot {
     private final Position centerPosition;
     private int stuckCounter = 0;
 
-    public ExampleBot(String name) {
-        super(name);
+    public ExampleBot() {
+        super("ExampleBot");
         this.centerPosition = new Position(
             GameConfig.getBoardSize() / 2,
             GameConfig.getBoardSize() / 2
