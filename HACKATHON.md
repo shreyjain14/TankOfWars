@@ -87,7 +87,7 @@ new TeamABCBot();
 2. **Run the Game**:
 
 - Execute the `Main` class to test your bot against others.
-- If you are using termimal to run use the following command `./mvnw clean compile exec:java "-Dexec.mainClass=me.shreyjain.Main"`
+- If you are using terminal to run use the following command `./mvnw clean compile exec:java "-Dexec.mainClass=me.shreyjain.Main"`
 
 ## Step 4: Submitting Your Bot
 
