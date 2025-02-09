@@ -10,7 +10,7 @@ This game is where you can create your own bot and compete against other bots.
 
 1. Clone the repository
 2. Build with Maven
-3. Run `Main.java` or if you are using termimal to run use the following command `./mvnw clean compile exec:java "-Dexec.mainClass=me.shreyjain.Main"`
+3. Run `Main.java` or if you are using terminal to run use the following command `./mvnw clean compile exec:java "-Dexec.mainClass=me.shreyjain.Main"`
 4. Check `logs/` for game details
 
 ## Logging
